@@ -21,8 +21,6 @@ module Crossover
     end
 
     def self.post(server, port)
-      p server
-      p port
       socket = TCPSocket.open(server, port)
       while line = socket.gets   # Read lines from the socket
         puts line.chop      # And print with platform line terminator
