@@ -8,7 +8,6 @@ require 'gserver'
 # Can accept multiple client
 # Can listen on multiple ports
 
-
 module Crossover
   class Server < GServer
     attr_reader :socket
@@ -21,7 +20,7 @@ module Crossover
       # puts " "
     end
 
-    def server(io)
+    def serve(io)
       io.puts(Time.now)
     end
 
