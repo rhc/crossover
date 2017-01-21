@@ -18,12 +18,15 @@ module Crossover
     method_option :port, aliases: "-p", default: "50000"
     def server
       port = options[:port] || 50000
-      @server = Server.new(port)
-      @server.audit = true
-      @server.debug = true
-      @server.start
-      trap("SIGINT") {@server.stop}
-      @server.join
+      byebug
+      if Server.in_service?(port)
+        puts "Cannot create  new server. Already running!"
+      else
+        @server = Server.new(port)
+        @server.audit = true
+        @server.start
+        @server.join
+      end
     end
 
   end
