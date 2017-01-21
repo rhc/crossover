@@ -18,7 +18,9 @@ module Crossover
     method_option :port, aliases: "-p", default: "50000"
     def server
       port = options[:port] || 50000
-      puts Server.new(port).start
+      @server = Server.new(port)
+      @server.audit = true
+      @server.start
     end
 
   end
