@@ -20,6 +20,9 @@ module Crossover
       port = options[:port] || 50000
       @server = Server.new(port)
       @server.audit = true
+      @server.debug = true
+      @server.start
+      trap("SIGINT") {@server.stop}
       @server.join
     end
 

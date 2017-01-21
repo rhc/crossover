@@ -10,7 +10,6 @@ require 'gserver'
 
 module Crossover
   class Server < GServer
-    attr_reader :socket
 
     def initialize( port, *args)
       super(port, *args)
