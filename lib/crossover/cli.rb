@@ -20,7 +20,7 @@ module Crossover
       port = options[:port] || 50000
       @server = Server.new(port)
       @server.audit = true
-      @server.start
+      @server.join
     end
 
   end

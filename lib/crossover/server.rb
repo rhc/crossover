@@ -21,7 +21,7 @@ module Crossover
     end
 
     def serve(io)
-      io.puts(Time.now)
+      io.puts(Time.now.to_s)
     end
 
     # def start
