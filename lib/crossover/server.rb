@@ -1,4 +1,5 @@
 require 'gserver'
+require 'logger'
 
 # listen to a given port
 # accepts data from client
@@ -11,34 +12,36 @@ require 'gserver'
 module Crossover
   class Server < GServer
 
-    def initialize( port, *args)
-      super(port, *args)
-      # @socket = TCPServer.new('localhost', port)
-      # puts "* Server listening on port #{port} "
-      # puts "Use Ctrl-C to stop"
-      # puts " "
+    def initialize(port, host='127.0.0.1', max_connections = 10, stdlog = $stderr, audit = true, debug = false  )
+      if stdlog != $stderr
+        @logger = Logger.new(File.expand_path(stdlog) )
+      end
+      super(port, host, max_connections, $stderr, audit, debug )
+    end
+
+    def starting
     end
 
     def serve(io)
-      io.puts(Time.now.to_s)
+      data = io.read(1024)
+      log "client:#{io.peeraddr[1]} #{io.peeraddr[2]}<#{io.peeraddr[3]}> post #{data.bytesize} bytes\n#{data}"
+      puts ""
+      io.puts('Bye!')
     end
 
-    # def start
-    #   loop do
-    #     Thread.start(socket.accept) do |client|
-    #       puts "#{client.peeraddr}"
-    #       puts "Connection from #{client.peeraddr[2]} at #{client.peeraddr[3]}"
-    #       client.puts Time.now
-    #       print(client.addr(true), " is gone\n")
-    #       client.puts "\nGoodbye"
-    #       client.close
-    #     end
-    #   end
-    # end
+    def stopping
+      log("#{self.class.to_s} #{@host}:#{@port} stop")
+      @logger.close
+    end
 
-    # def stop
-    # end
+    def log message
+      if @stdlog
+        @stdlog.puts("[#{Time.new.ctime}] %s" % message)
+        @stdlog.flush
+        @logger.info message
+      end
+    end
+
 
   end
-
 end
