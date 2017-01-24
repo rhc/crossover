@@ -24,7 +24,7 @@ module Crossover
       socket = TCPSocket.open(server, port)
       puts socket.addr(:hostname)[2..3].join " at "
       size = data.bytesize
-      puts "Sending #{size} bytes to #{port} on #{server}."
+      puts "Sending #{size} bytes to port #{port} on #{server}."
       puts data
       socket.write( data )
       puts "\nBye!"

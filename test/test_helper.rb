@@ -5,20 +5,10 @@ require 'simplecov'
 SimpleCov.start
 require 'crossover'
 require 'minitest/autorun'
+require 'support/run_command_helpers'
 
-require 'open3'
 
 
-def run_command cli
-  stdin, stdout, stderr, thread = Open3.popen3(cli)
-  if block_given?
-    yield stdout
-  end
-  stdin.close
-  stdout.close
-  stderr.close
-  thread.kill
-end
 
 
       #

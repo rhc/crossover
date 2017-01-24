@@ -12,11 +12,11 @@ require 'logger'
 module Crossover
   class Server < GServer
 
-    def initialize(port, host='127.0.0.1', max_connections = 10, stdlog = $stderr, audit = true, debug = false  )
-      if stdlog != $stderr
+    def initialize(port, host='127.0.0.1', max_connections = 10, stdlog = $stdout, audit = true, debug = false  )
+      if stdlog != $stdout
         @logger = Logger.new(File.expand_path(stdlog) )
       end
-      super(port, host, max_connections, $stderr, audit, debug )
+      super(port, host, max_connections, $stdout, audit, debug )
     end
 
     def serve(io)

@@ -9,8 +9,6 @@ module Crossover
     method_option :data, aliases: '-d'
     def client
       begin
-        p ARGV
-        p $ARGF
         remote_host = options[:host]
         port = options[:port]
         data = options[:data] || Client.clean_data
