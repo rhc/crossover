@@ -19,9 +19,6 @@ module Crossover
       super(port, host, max_connections, $stderr, audit, debug )
     end
 
-    def starting
-    end
-
     def serve(io)
       data = io.read(1024)
       log "client:#{io.peeraddr[1]} #{io.peeraddr[2]}<#{io.peeraddr[3]}> post #{data.bytesize} bytes\n#{data}"
@@ -38,10 +35,12 @@ module Crossover
       if @stdlog
         @stdlog.puts("[#{Time.new.ctime}] %s" % message)
         @stdlog.flush
+      end
+
+      if @logger
         @logger.info message
       end
     end
-
 
   end
 end

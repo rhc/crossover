@@ -6,11 +6,15 @@ module Crossover
     desc 'client', 'Send data to a remote HOST listening on PORT'
     method_option :host, aliases: '-h', default: '127.0.0.1'
     method_option :port, aliases: '-p', default: 50000, type: :numeric
+    method_option :data, aliases: '-d'
     def client
       begin
+        p ARGV
+        p $ARGF
         remote_host = options[:host]
         port = options[:port]
-        puts Client.post(remote_host, port)
+        data = options[:data] || Client.clean_data
+        puts Client.post(data, remote_host, port)
 
       rescue Errno::ECONNREFUSED
         puts "Sorry! Connection refused by #{remote_host} on  port #{port}"
@@ -48,6 +52,12 @@ module Crossover
         puts "\nExiting ..."
       end
     end
+
+  map %w[--version -v] => :version
+  desc "--version, -v", "Print the version"
+  def version
+    puts "Crossover version #{Crossover::VERSION}"
+  end
 
   end
 

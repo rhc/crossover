@@ -20,14 +20,13 @@ module Crossover
       replace_all_spaces_with_asterisk(clean)
     end
 
-    def self.post(server, port)
+    def self.post(data , server, port)
       socket = TCPSocket.open(server, port)
       puts socket.addr(:hostname)[2..3].join " at "
-      message = clean_data
-      size = message.bytesize
-      puts "Sending #{size} bytes to remote host."
-      puts message
-      socket.write( message )
+      size = data.bytesize
+      puts "Sending #{size} bytes to #{port} on #{server}."
+      puts data
+      socket.write( data )
       puts "\nBye!"
       socket.close
     end
