@@ -29,10 +29,12 @@ class CrossoverClientTest < Minitest::Test
   end
 
   def test_post
-    remote_host = TCPServer.new(50000)
-    [ 'Hello' ].each do |data,|
-      response = Crossover::Client.post(data, '127.0.0.1', '50000')
-      response.must_match(/Sending\s+\d+\s+bytes|Sorry!/)
+    remote_host = TCPServer.new(60000)
+    [
+      ['Hello', '127.0.0.1', 60000 ]
+    ].each do |data, host, port|
+      out = capture_io { Crossover::Client.post(data, host , 60000)}.join
+      out.must_match(/Sending\s+\d+\s+bytes|Sorry!/)
     end
     remote_host.close
   end
