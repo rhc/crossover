@@ -21,14 +21,17 @@ module Crossover
     end
 
     def self.post(data , server, port)
-      socket = TCPSocket.open(server, port)
-      puts socket.addr(:hostname)[2..3].join " at "
-      size = data.bytesize
-      puts "Sending #{size} bytes to port #{port} on #{server}."
-      puts data
-      socket.write( data )
-      puts "\nBye!"
-      socket.close
+      begin
+        size = data.bytesize
+        puts "Sending #{size} bytes to port #{port} on #{server}."
+        socket = TCPSocket.open(server, port)
+        puts data
+        socket.write( data )
+        puts "\nBye!"
+        socket.close
+      rescue Errno::ECONNREFUSED
+        puts "Sorry! Connection refused by #{server} on port #{port}"
+      end
     end
   end
 

@@ -28,5 +28,12 @@ class CrossoverClientTest < Minitest::Test
     end
   end
 
+  def test_post
+    [ 'Hello' ].each do |data,|
+      response = Crossover::Client.post(data, '127.0.0.1', '50000')
+      response.must_match(/Sending\s+\d+\s+bytes|Sorry!/)
+    end
+  end
+
 
 end

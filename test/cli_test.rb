@@ -2,28 +2,21 @@ require 'test_helper'
 describe Crossover::CLI do
   include RunCommandHelpers
 
-  before do
-    system "pkill -f bin/crossover"
-  end
-
-  after do
-    system "pkill -f bin/crossover"
-  end
 
   describe '#client command' do
     it 'by default, sends data to the local server listening on port 50000' do
       system "pkill -f bin/crossover"
       system "crossover server &"
-        run_command("crossover client") do |console|
-          console.must_match(/Sending \d+ bytes to port 50000 on 127.0.0.1/)
-          console.must_match(/Bye!/)
+      run_command("crossover client") do |console|
+        console.must_match(/Sending \d+ bytes to port 50000 on 127.0.0.1/)
+        console.must_match(/Bye!/)
       end
       system "pkill -f bin/crossover"
     end
 
-
     it 'sends data to a remote server listening on a given port e.g. 12345' do
       system "crossover server -p 12345 &"
+      system "echo"
       run_command("crossover client -p 12345") do |console|
         console.must_match(/Sending \d+ bytes to port 12345 on 127.0.0.1/)
         console.must_match(/Bye!/)
@@ -47,17 +40,23 @@ describe Crossover::CLI do
 
   describe '#server command' do
     it 'by default listens on port 50000, accepts data and log it to ~/crossover.log file' do
-      run_command("crossover server &") do |console|
-        puts 'I am here'
-        system "crossover client "
+      system "pkill -f bin/crossover"
+      file = File.open('command.sh', 'w')
+      system "echo 'crossover server &' > command.sh"
+      system "echo 'crossover client '  >> command.sh"
+      system "echo 'pkill -f bin/crossover'  >> command.sh"
+      system "sh command.sh > result.log"
+      file.close
 
-        console.must_match(/client:.*\s+connect/)
-        console.must_match(/client:.*post.*\d+\s+bytes/)
-        console.must_match(/client:.*\+disconnect/)
-      end
-    end
+      out = File.open('result.log').readlines.join " "
+
+      # console = capture_subprocess_io {`crossover server & ; crossover client`}.join " "
+       out.must_match(/client:.*\s+connect/)
+       out.must_match(/client:.*post.*\d+\s+bytes/)
+       out.must_match(/client:.*\s+disconnect/)
+      system "pkill -f bin/crossover"
   end
-
+  end
 
   describe '#version command' do
     it 'should be able to print the version of the application' do
@@ -66,5 +65,5 @@ describe Crossover::CLI do
         out.must_match( regex )
       end
     end
-   end
+  end
 end
