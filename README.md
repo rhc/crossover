@@ -1,8 +1,20 @@
 # Crossover
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/crossover`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+This gem allows the following apps to work together
+
+. A client app
+
+- Reads 1024 bytes from /dev/urandom
+- Cleans out all non UTF-8 compliant chars
+- Replaces all spaces with asterix
+- Sends this data to a server via TCPSocket
+
+. A server app
+
+- Listens for any connections
+- Accepts the data from the client app
+- Prints it into a log file
 
 ## Installation
 

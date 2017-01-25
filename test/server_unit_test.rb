@@ -2,11 +2,8 @@ require 'test_helper'
 require 'fileutils'
 
 describe Crossover::Server do
-
-  before do
-    if Crossover::Server.in_service?(50000)
-      Crossover::Server.close(50000)
-    end
+  before  do
+    Crossover::Server.close(50_000) if Crossover::Server.in_service?(50_000)
   end
 
   it 'should listen for any connection' do
@@ -28,11 +25,7 @@ describe Crossover::Server do
   end
 
   describe 'when there is another server at the same address and port' do
-
     it 'should give en error' do
-      #
     end
-
   end
 end
-

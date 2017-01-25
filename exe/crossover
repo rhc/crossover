@@ -2,4 +2,3 @@
 
 require 'crossover'
 Crossover::CLI.start(ARGV)
-
