@@ -4,14 +4,11 @@
 This gem allows the following apps to work together:
 
 1. A client app
-
 - Reads 1024 bytes from /dev/urandom
 - Cleans out all non UTF-8 compliant chars
 - Replaces all spaces with asterix
 - Sends this data to a server via TCPSocket
-
 2. A server app
-
 - Listens for any connections
 - Accepts the data from the client app
 - Prints it into a log file
