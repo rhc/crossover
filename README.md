@@ -1,7 +1,7 @@
 # Crossover
 
-
-This gem allows  following apps to work together:
+This gem provides a CLI (Command Line Interface)
+that allows the following apps  to work together
 
 The client app
 
@@ -16,55 +16,117 @@ The server app
 - Accepts the data from the client app
 - Prints it into a log file
 
+
 ## Installation
 
-Add this line to your application's Gemfile:
+### From RubyGems
 
-```ruby
-gem 'crossover'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+The easiest way to install the application is to install as a gem from RubyGems.
+Run the command below
 
     $ gem install crossover
 
+### From source code
+
+- If you have access to the Internet, obtain the source code from Github repository.
+
+  $ git clone https://github.com/rhc/crossover.git
+
+- If you have access to the ChristianKyony_SE_Ruby_Network.zip archive, go to the Code folder.
+
+ $ unzip ChristianKyony_SE_Ruby_Network
+ $ cd Code
+
+Both commands below will create a new Crossover directory.
+
+  $ cd crossover
+
+Install the dependencies
+
+  $ bin/setup
+
+Install the gem in your local machine
+
+  $ bundle exec rake install
+
+
 ## Usage
 
-TODO: Write usage instructions here
+### Basic Usage
 
-## Development
+You need only two commands. Start by launching the server app.
 
-After checking out the repo, run `bin/setup` to install dependencies.
-Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-To install this gem onto your local machine, run `bundle exec rake install`.
-To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+    $ crossover server
 
-## Contributing
+The server will be listening on TCP port 50000  and will log all data received from TCP clients in the ~/crossover.log file.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/crossover.
+You should see something similar to the following:
+
+    [Wed Jan 25 22:50:02 2017] Crossover::Server 127.0.0.1:50000 start
+
+To send data to the server on the default port, run the command below
+
+    $ crossover client
+
+The client will automatically send data to the running server.
+You should see something similar to the following:
+
+    Sending 504 bytes to port 50000 on 127.0.0.1.
+    Vw9y4**I{c:3r*Kl*l.}x;p[uD^'bY3av*5QvoZQ8*AJ]jZS&*^g*;6X_=G~HW_'*Ta`UmdO$6*9S'
+    )S:.DsDTB4'eI*da}rPvDS5Vyxs-@UJl&'!wl*5n10juoeLy(FUkh5:.bicDA=s:Nyl?t*=*8%qYIc{
+    $|c:vnzo;(Bb*+3K}Hr*F*4m*HNT^%+=Jm;nd$*&E0*o(EpU9/w?\ovuOn:2YJn3#I*&}xG'1;*wra-c4
+    {?7,*2L!li*y&?qy*(%:hEVDVr$5,F*DD*DfuG@Y'/>D](:?_*}/YoF\Syo2V*;_8W<*ezhxUiVbLwB
+    rwmty7Wp*vMX**Rp*^tj/H*i*O&j6==@1=.N7e\"1;RlbR/W)rE&<cQ"\H*&1oAmjmv'WP*=h&9*
+
+Bye!
+
+### Advanced Usage
+
+You can get help on available commands and options
+
+  $ crossover help
+
+  Commands:
+    crossover --version, -v   # Print the version
+    crossover client          # Send data to a remote HOST listening on PORT
+    crossover help [COMMAND]  # Describe available commands or one specific command
+    crossover server          # Launch a server listening on PORT
+
+
+You can get help on a specific commands
+
+  $ crossover help server
+
+  Usage:
+    crossover server
+
+  Options:
+    -h, [--host=HOST]          # Default: 127.0.0.1
+    -p, [--port=N]             # Default: 50000
+    -l, [--logfile=LOGFILE]    # Default: ~/crossover.log
+    -c, [--max-connections=N]  # Default: 1000
+
+
+
+  $ crossover client
+
+  Usage:
+    crossover client
+
+  Options:
+    -h, [--host=HOST]  # Default: 127.0.0.1
+    -p, [--port=N]     # Default: 50000
+    -d, [--data=DATA]
 
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+The gem is available as open source
+under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
-Create a text file with the following information
 
-Instructions to install and configure prerequisites or dependencies, if any
+## Assumptions
 
-Instructions to create and initialize any data (if required)
+- This gem has been developed for POSIX system (LINUX, MAC OS)
 
-Assumptions you have made - it is good to explain your thought process and the assumptions you have made
-
-Requirements that you have not covered in your submission, if any
-
-Instructions to configure and prepare the source code to build and run properly
-
-Issues you have faced while completing the assignment, if any
-
-Constructive feedback for improving the assignment
 
