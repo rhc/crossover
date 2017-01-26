@@ -30,16 +30,16 @@ Run the command below
 
 - If you have access to the Internet, obtain the source code from Github repository.
 
-  $ git clone https://github.com/rhc/crossover.git
+   $ git clone https://github.com/rhc/crossover.git
 
 - If you have access to the ChristianKyony_SE_Ruby_Network.zip archive, go to the Code folder.
 
- $ unzip ChristianKyony_SE_Ruby_Network
- $ cd Code
+   $ unzip ChristianKyony_SE_Ruby_Network
+   $ cd Code
 
 Both commands below will create a new Crossover directory.
 
-  $ cd crossover
+   $ cd crossover
 
 Install the dependencies
 
@@ -56,17 +56,17 @@ Install the gem in your local machine
 
 You need only two commands. Start by launching the server app.
 
-    $ crossover server
+   $ crossover server
 
 The server will be listening on TCP port 50000  and will log all data received from TCP clients in the ~/crossover.log file.
 
 You should see something similar to the following:
 
-    [Wed Jan 25 22:50:02 2017] Crossover::Server 127.0.0.1:50000 start
+   [Wed Jan 25 22:50:02 2017] Crossover::Server 127.0.0.1:50000 start
 
 To send data to the server on the default port, run the command below
 
-    $ crossover client
+   $ crossover client
 
 The client will automatically send data to the running server.
 You should see something similar to the following:
@@ -78,11 +78,11 @@ You should see something similar to the following:
     {?7,*2L!li*y&?qy*(%:hEVDVr$5,F*DD*DfuG@Y'/>D](:?_*}/YoF\Syo2V*;_8W<*ezhxUiVbLwB
     rwmty7Wp*vMX**Rp*^tj/H*i*O&j6==@1=.N7e\"1;RlbR/W)rE&<cQ"\H*&1oAmjmv'WP*=h&9*
 
-Bye!
+    Bye!
 
 ### Advanced Usage
 
-You can get help on available commands and options
+You can get help on available commands
 
   $ crossover help
 
@@ -93,7 +93,7 @@ You can get help on available commands and options
     crossover server          # Launch a server listening on PORT
 
 
-You can get help on a specific commands
+You can get help on specific options when launching the server app with `crossover server`
 
   $ crossover help server
 
@@ -107,6 +107,7 @@ You can get help on a specific commands
     -c, [--max-connections=N]  # Default: 1000
 
 
+You can get help on specific options when launching the client app with `crossover client`.
 
   $ crossover client
 
