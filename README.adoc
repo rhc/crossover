@@ -1,5 +1,6 @@
 = Crossover
 Christian Kyony <ckyony@changamuka.com>
+v0.0.1, 25 Janvier 2017
 
 
 This gem provides a CLI (Command Line Interface)
