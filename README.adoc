@@ -54,6 +54,9 @@ $ gem install crossover
 
   $ bundle exec rake install
 
+- Run the test suite
+
+  $ rake test
 
 == Usage
 
