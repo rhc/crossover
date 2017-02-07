@@ -1,4 +1,3 @@
 #!/usr/bin/env ruby
-
 require 'crossover'
 Crossover::CLI.start(ARGV)

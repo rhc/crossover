@@ -26,7 +26,15 @@ module Crossover
       socket = TCPSocket.open(server, port)
       puts data
       socket.write(data)
-      puts "\nBye!"
+
+      # wait for the ACK from the server
+while line = socket.gets # Read lines from socket
+   if line =~ /ACK!/
+     puts "I am happy you get the data"
+     break
+   end
+end
+
       socket.close
     rescue Errno::ECONNREFUSED
       puts "Sorry! Connection refused by #{server} on port #{port}"

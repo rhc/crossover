@@ -20,7 +20,7 @@ module Crossover
       data = io.read(1024)
       log "client:#{io.peeraddr[1]} #{io.peeraddr[2]}<#{io.peeraddr[3]}> post #{data.bytesize} bytes\n#{data}"
       puts ''
-      io.puts('Bye!')
+      io.puts('ACK!')
     end
 
     def stopping
